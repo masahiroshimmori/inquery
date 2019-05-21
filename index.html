@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title>お問い合わせフォーム</title>
+    <meta name="viewport" content="width=divice-width,initial-scale=1.0">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/mailform.css">
+    <!--ご希望日の日時選択ライブラリはここへ-->
+    <link rel="stylesheet" href="css/jquery.datetimepicker.css">
+  </heae>
+  <body>
+    <form action="php/mailform.php" method="post" id="mail_form">
+      <dl>
+        <dt>会社名<span>Company Name</span></dt>
+        <dd><input type="text" id="company" name="company" value=""></dd>
+
+        <dt>名前<span>Your name</span></dt>
+        <dd class="required"><input type="text" id="name_1" name="name_1" value=""><input type="text" id="name_2" name="name_2" value=""></dd>
+
+        <dt>ふりがな<span>Name Reading</span></dt>
+        <dd><input type="text" id="read_1" name="read_1" value=""><input type="text" id="read_2" name="read_2" value=""></dd>
+
+        <dt>メールアドレス<span>Mail Address</span></dt>
+        <dd class="required"><input type="email" id="mail_address" name="mail_address" value=""></dd>
+
+        <dt>メールアドレス<br>(確認用)<span>Mail Address Confirm</span></dt>
+        <dd class="required"><input type="email" id="mail_address_confirm" name="mail_address_confirm" value=""></dd>
+
+        <dt>性別<span>Gender</span></dt>
+        <dd>
+          <ul>
+            <li><label><input type="radio" class="gender" name="gender" value="男性">男性</label></li>
+            <li><label><input type="radio" class="gender" name="gender" value="女性">女性</label></li>
+          </ul>
+        </dd>
+
+        <dt>郵便番号<span>Portal</span></dt>
+        <dd class="required"><input type="text" id="portal" name="portal" value="" onkeyup="AjaxZip3.zip2addr(this,'','address','address');"></dd>
+
+        <dt>住所<span>Address</span></dt>
+        <dd class="required"><input type="text" id="address" name="address" value=""></dd>
+
+        <dt>電話番号<span>Phone Number</span></dt>
+        <dd class="required"><input type="tel" id="phone" name="phone" value=""></dd>
+
+        <dt>ご返信の方法<span>Resiponse</span></dt>
+        <dd class="required">
+          <ul>
+            <li><label><input type="radio" class="response" name="response" value="電話での返信を希望">電話での返信を希望</label></li>
+            <li><label><input type="radio" class="response" name="response" value="メールでの返信を希望">メールでの返信を希望</label></li>
+            <li><label><input type="radio" class="response" name="response" value="返信不要">返信不要</label></li>
+          </ul>
+        </dd>
+
+        <dt>連絡ご希望の日時<span>Schedule</span></dt>
+        <dd><input type="text" id="schedule" name="schedule" value="" readonly="readonly"></dd>
+
+        <dt>ご希望の商品<span>Product</span></dt>
+        <dd>
+            <select id="product" name="product">
+              <option value="">選択してください</option>
+              <option value="iphone5">iphone5</option>
+              <option value="iphone5s">iphone5s</option>
+              <option value="iphone6">iphone6</option>
+              <option value="iphone6s">iphone6s</option>
+              <option value="iphone6 Plus">iphone6 Plus</option>
+              <option value="iphone6s Plus">iphone6s Plus</option>
+              <option value="iphone7">iphone7</option>
+              <option value="iphone7s">iphone7s</option>
+              <option value="iphone7 Plus">iphone7 Plus</option>
+              <option value="iphone7s Plus">iphone7s Plus</option>
+            </select>
+        </dd>
+
+        <dt>お問い合わせの種類<span>Inquiry Kind</span></dt>
+        <dd>
+            <ul>
+              <li></label><input type="checkbox" class="kind" name="kind[]" value="webサイトについ">webサイトについて</label></li>
+              <li></label><input type="checkbox" class="kind" name="kind[]" value="商品について">商品について</label></li>
+              <li></label><input type="checkbox" class="kind" name="kind[]" value="キャンペーンについ">キャンペーンについて</label></li>
+              <li></label><input type="checkbox" class="kind" name="kind[]" value="採用について">採用について</label></li>
+              <li></label><input type="checkbox" class="kind" name="kind[]" value="ご意見・ご要望">ご意見・ご要望</label></li>
+            <ul>
+        </dd>
+
+        <dt>お問い合わせ内容<span>Mail Contents</span></dt>
+        <dd class="required"><textarea id="mail_contents" name="mail_contents" cols="40" rows="5"></textarea></dd>
+      </dl>
+        <p id="form_submit"><input type="button" id="form_submit_button" value="送信する"></p>
+    </form>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script src="php/mailform-js.php"></script>
+
+    <!--フリガナ自動入力ライブラリ-->
+    <script src="js/jquery.autoKana.js"></script>
+    <script>
+    	(function( $ ) {
+        $.fn.autoKana( '#name_1', '#read_1', {
+          katakana: false
+        });
+        $.fn.autoKana( '#name_2', '#read_2', {
+          katakana: false
+        });
+    	})( jQuery );
+    </script>
+
+    <!-- 住所自動入力ライブラリここから -->
+    <script src="js/ajaxzip3.js"></script>
+
+    <!--日時選択のライブラリ-->
+    <script src="js/jquery.datetimepicker.js"></script>
+    <script>
+    	(function( $ ) {
+    		$( 'input#schedule' ).datetimepicker({
+    			lang: 'ja'
+    		});
+    	})( jQuery );
+    </script>
+  </body>
+</html>
